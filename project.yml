@@ -11,8 +11,6 @@ targets:
     platform: iOS
     sources:
       - path: Sources
-    resources:
-      - path: Resources
     settings:
       PRODUCT_BUNDLE_IDENTIFIER: com.gentleman.menu
       INFOPLIST_KEY_CFBundleDisplayName: GENTLEMAN MENU
