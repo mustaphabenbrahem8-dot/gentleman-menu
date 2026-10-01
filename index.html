@@ -2,348 +2,437 @@
 <html lang="it">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>GENTLEMAN MENU</title>
-
 <style>
-*{
-box-sizing:border-box;
-}
-
+*{box-sizing:border-box}
 body{
-margin:0;
-background:#050509;
-color:white;
-font-family:Arial,sans-serif;
-min-height:100vh;
+margin:0;background:#050509;color:#fff;font-family:Arial,sans-serif;
+min-height:100vh
 }
-
-.login{
-width:90%;
-max-width:400px;
-margin:80px auto;
-padding:30px;
-background:#0d0a15;
-border:1px solid #9b4dff;
-border-radius:20px;
-text-align:center;
-box-shadow:0 0 30px #8b3dff66;
+.login,.menu{
+width:94%;max-width:1100px;margin:35px auto;
+background:#0d0a15;border:1px solid #9b4dff;border-radius:20px;
+box-shadow:0 0 35px #8b3dff55
 }
-
-.logo{
-font-size:28px;
-font-weight:bold;
-color:#c084fc;
-text-shadow:0 0 15px #9b4dff;
+.login{max-width:420px;padding:30px;text-align:center}
+.logo{font-size:28px;font-weight:bold;color:#c084fc;text-shadow:0 0 15px #9b4dff}
+input,select{
+width:100%;padding:13px;margin:8px 0;background:#08060d;
+border:1px solid #6d28d9;border-radius:10px;color:#fff
 }
-
-input{
-width:100%;
-padding:14px;
-margin-top:20px;
-background:#08060d;
-border:1px solid #6d28d9;
-border-radius:10px;
-color:white;
-}
-
 button{
-padding:13px 20px;
-margin-top:12px;
-background:#7c3aed;
-border:0;
-border-radius:10px;
-color:white;
-font-weight:bold;
+padding:12px 16px;margin:5px;background:#7c3aed;
+border:0;border-radius:10px;color:white;font-weight:bold
 }
-
-#menu{
-display:none;
-width:95%;
-max-width:1100px;
-margin:20px auto;
-background:#09070f;
-border:1px solid #8b3dff;
-border-radius:20px;
-box-shadow:0 0 35px #8b3dff55;
-overflow:hidden;
-}
-
 .header{
-padding:20px;
-border-bottom:1px solid #392052;
-font-size:24px;
-font-weight:bold;
-color:#c084fc;
+padding:20px;border-bottom:1px solid #392052;
+display:flex;justify-content:space-between
 }
-
-.content{
-padding:20px;
+.header b{font-size:23px;color:#c084fc}
+.nav{display:flex;gap:5px;overflow:auto;padding:12px}
+.nav button{white-space:nowrap}
+.content{padding:15px}
+.section{display:none}
+.section.active{display:block}
+.grid{
+display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px
 }
-
 .card{
-background:#100b19;
-border:1px solid #4c1d72;
-border-radius:14px;
-padding:18px;
-margin-bottom:15px;
+background:#120d1d;border:1px solid #4c1d72;border-radius:14px;
+padding:17px;margin-bottom:12px
 }
-
-.card h2{
-margin-top:0;
-color:#d8b4fe;
+.card h2{color:#d8b4fe;margin-top:0}
+.stat{font-size:25px;color:#c084fc;font-weight:bold}
+.small{font-size:12px;color:#aaa}
+.error{color:#fb7185}
+.log{
+background:#050509;border:1px solid #30203e;border-radius:10px;
+padding:10px;min-height:70px;font-family:monospace;font-size:12px
 }
-
-.menu-button{
-margin:5px;
+.switch{
+width:48px;height:26px;background:#33213f;border-radius:20px;padding:3px
 }
-
-.section{
-display:none;
+.switch span{
+display:block;width:20px;height:20px;background:#aaa;border-radius:50%
 }
-
-.section.active{
-display:block;
+.switch.on{background:#7c3aed}
+.switch.on span{transform:translateX(22px);background:#fff}
+.row{
+display:flex;justify-content:space-between;align-items:center;
+padding:9px 0
 }
-
-.error{
-color:#fb7185;
-margin-top:10px;
-}
+footer{text-align:center;color:#777;font-size:11px;padding:15px}
 </style>
 </head>
 
 <body>
 
 <div id="login" class="login">
-
 <div class="logo">♛ GENTLEMAN MENU</div>
-
 <p>Accesso al menu</p>
-
-<input
-id="key"
-type="password"
-placeholder="Inserisci la chiave"
->
-
-<button onclick="unlock()">
-SBLOCCA MENU
-</button>
-
-<div id="error" class="error"></div>
-
+<input id="key" type="password" placeholder="Inserisci la chiave">
+<button onclick="unlock()">SBLOCCA MENU</button>
+<p id="error" class="error"></p>
+<p class="small">Versione 2.0 DEMO / TEST</p>
 </div>
 
-<div id="menu">
+<div id="menu" class="menu" style="display:none">
 
 <div class="header">
-♛ GENTLEMAN MENU
+<b>♛ GENTLEMAN MENU</b>
+<span>v2.0</span>
+</div>
+
+<div class="nav">
+<button onclick="openTab('home')">🏠 HOME</button>
+<button onclick="openTab('player')">👤 PLAYER</button>
+<button onclick="openTab('visual')">👁 VISUAL</button>
+<button onclick="openTab('vehicle')">🚗 VEHICLE</button>
+<button onclick="openTab('world')">🌍 WORLD</button>
+<button onclick="openTab('casino')">🎰 CASINO</button>
+<button onclick="openTab('settings')">⚙ SETTINGS</button>
 </div>
 
 <div class="content">
 
-<button class="menu-button" onclick="openSection('home')">
-🏠 HOME
-</button>
-
-<button class="menu-button" onclick="openSection('visual')">
-👁 VISUAL
-</button>
-
-<button class="menu-button" onclick="openSection('player')">
-👤 PLAYER
-</button>
-
-<button class="menu-button" onclick="openSection('vehicle')">
-🚗 VEHICLE
-</button>
-
-<button class="menu-button" onclick="openSection('world')">
-🌍 WORLD
-</button>
-
-<button class="menu-button" onclick="openSection('casino')">
-🎰 CASINO TEST
-</button>
-
-<button class="menu-button" onclick="openSection('settings')">
-⚙ SETTINGS
-</button>
-
-<div id="home" class="section active card">
+<div id="home" class="section active">
+<div class="grid">
+<div class="card">
 <h2>🏠 HOME</h2>
 <p>Benvenuto nel GENTLEMAN MENU.</p>
-<p>Versione: 1.0 TEST</p>
+<p>● Sistema demo online</p>
+</div>
+<div class="card">
+<h2>📊 STATUS</h2>
+<div class="stat">READY</div>
+<p class="small">Interfaccia demo indipendente dal gioco.</p>
+</div>
+<div class="card">
+<h2>⚡ QUICK ACTIONS</h2>
+<button onclick="openTab('player')">PLAYER</button>
+<button onclick="openTab('vehicle')">VEHICLE</button>
+<button onclick="openTab('casino')">CASINO</button>
+</div>
+</div>
 </div>
 
-<div id="visual" class="section card">
-<h2>👁 VISUAL</h2>
-<p>ESP — TEST</p>
-<p>Boxes — TEST</p>
-<p>Names — TEST</p>
-<p>Health — TEST</p>
-<p>Distance — TEST</p>
-</div>
+<div id="player" class="section">
+<div class="grid">
 
-<div id="player" class="section card">
+<div class="card">
 <h2>👤 PLAYER</h2>
-
-<input
-id="playerName"
-placeholder="Nome demo"
->
-
-<button onclick="changeName()">
-CAMBIA NOME
-</button>
-
+<input id="playerName" placeholder="Nome demo">
+<button onclick="changeName()">CAMBIA NOME</button>
 <p>Nome attuale:
-<b id="currentName">Gentleman</b>
-</p>
+<b id="currentName">Gentleman</b></p>
+</div>
 
-<p>Livello:</p>
-
-<select id="level">
+<div class="card">
+<h2>⭐ LIVELLO</h2>
+<select id="level" onchange="setLevel()">
 <option>1</option>
 <option>10</option>
 <option>25</option>
 <option>50</option>
 <option>100</option>
 </select>
+<p>Livello:
+<b id="currentLevel">1</b></p>
+</div>
+
+<div class="card">
+<h2>📈 STATS</h2>
+<p>Salute: <b>100%</b></p>
+<p>Energia: <b>100%</b></p>
+<p>XP: <b id="xp">0</b></p>
+<button onclick="addXP()">+100 XP</button>
+</div>
+
+</div>
+</div>
+
+<div id="visual" class="section">
+<div class="grid">
+
+<div class="card">
+<h2>👁 VISUAL DEMO</h2>
+
+<div class="row">
+Boxes
+<div class="switch" onclick="toggle(this,'Boxes')"><span></span></div>
+</div>
+
+<div class="row">
+Names
+<div class="switch" onclick="toggle(this,'Names')"><span></span></div>
+</div>
+
+<div class="row">
+Health
+<div class="switch" onclick="toggle(this,'Health')"><span></span></div>
+</div>
+
+<div class="row">
+Distance
+<div class="switch" onclick="toggle(this,'Distance')"><span></span></div>
+</div>
+
+<div class="row">
+ESP Test
+<div class="switch" onclick="toggle(this,'ESP')"><span></span></div>
+</div>
 
 </div>
 
-<div id="vehicle" class="section card">
+<div class="card">
+<h2>📋 LOG</h2>
+<div id="visualLog" class="log">Nessuna modifica.</div>
+</div>
+
+</div>
+</div>
+
+<div id="vehicle" class="section">
+<div class="grid">
+
+<div class="card">
 <h2>🚗 VEHICLE</h2>
-<p>Velocità — TEST</p>
-<p>RPM — TEST</p>
-<p>Carburante — TEST</p>
-<p>Salute — TEST</p>
+
+<select id="vehicleType">
+<option>Sport Car</option>
+<option>Sedan</option>
+<option>SUV</option>
+<option>Motorbike</option>
+</select>
+
+<button onclick="selectVehicle()">SELEZIONA</button>
+
+<p>Veicolo:
+<b id="vehicleName">Sport Car</b></p>
 </div>
 
-<div id="world" class="section card">
-<h2>🌍 WORLD</h2>
-<p>World Debug — TEST</p>
-<p>Coordinate — TEST</p>
-<p>Camera Info — TEST</p>
+<div class="card">
+<h2>📊 TELEMETRIA</h2>
+
+<p>Velocità:
+<b id="speed">120</b> km/h</p>
+
+<p>RPM:
+<b id="rpm">3200</b></p>
+
+<p>Carburante:
+<b id="fuel">78%</b></p>
+
+<p>Salute:
+<b id="carHealth">100%</b></p>
+
+<button onclick="telemetry()">AGGIORNA</button>
 </div>
 
-<div id="casino" class="section card">
-<h2>🎰 CASINO TEST</h2>
-<p>Simulatore offline.</p>
+</div>
+</div>
 
-<p>Saldo demo:
-<b id="balance">1000000</b>
-$</p>
+<div id="world" class="section">
+<div class="grid">
 
-<input
-id="bet"
-type="number"
-value="1000"
-min="1"
->
+<div class="card">
+<h2>🌍 WORLD DEBUG</h2>
+<p>X: <b id="x">125.42</b></p>
+<p>Y: <b id="y">-87.11</b></p>
+<p>Z: <b id="z">32.50</b></p>
+<button onclick="world()">AGGIORNA</button>
+</div>
 
-<button onclick="spin()">
-GIRA
-</button>
+<div class="card">
+<h2>🎥 CAMERA</h2>
+<select onchange="camera.textContent=this.value">
+<option>FREE</option>
+<option>FOLLOW</option>
+<option>FIXED</option>
+</select>
+<p>Modalità: <b id="camera">FREE</b></p>
+</div>
+
+</div>
+</div>
+
+<div id="casino" class="section">
+<div class="grid">
+
+<div class="card">
+<h2>🎰 CASINO SIMULATOR</h2>
+
+<p>Saldo demo:</p>
+<div class="stat" id="balance">1,000,000 $</div>
+
+<input id="bet" type="number" value="1000" min="1">
+
+<button onclick="spin()">GIRA</button>
+<button onclick="resetCasino()">RESET</button>
 
 <p id="result">Risultato: —</p>
 
+<p class="small">
+Simulatore offline. Non modifica OneState RP.
+</p>
 </div>
 
-<div id="settings" class="section card">
+<div class="card">
+<h2>📜 REGISTRO</h2>
+<div id="casinoLog" class="log">
+Nessuna giocata.
+</div>
+</div>
+
+</div>
+</div>
+
+<div id="settings" class="section">
+<div class="grid">
+
+<div class="card">
 <h2>⚙ SETTINGS</h2>
-<p>GENTLEMAN MENU v1.0</p>
-<button onclick="location.reload()">
-RESET
-</button>
+
+<p>Tema</p>
+<select onchange="theme(this.value)">
+<option value="purple">Purple Night</option>
+<option value="blue">Midnight</option>
+<option value="gold">Dark Gold</option>
+</select>
+
+<p>Lingua</p>
+<select onchange="language(this.value)">
+<option>Italiano</option>
+<option>English</option>
+<option>Français</option>
+<option>Español</option>
+<option>Deutsch</option>
+<option>Português</option>
+</select>
+</div>
+
+<div class="card">
+<h2>🔐 ACCESSO</h2>
+<p>Chiave demo:</p>
+<b>GENTLEMAN-2026</b>
+<br><br>
+<button onclick="location.reload()">ESCI</button>
 </div>
 
 </div>
+</div>
+
+</div>
+
+<footer>
+GENTLEMAN MENU v2.0 — DEMO / TEST
+</footer>
+
 </div>
 
 <script>
-
 const KEY="GENTLEMAN-2026";
+let balance=1000000;
+let xp=0;
 
 function unlock(){
-
-const entered=document.getElementById("key").value;
-
-if(entered===KEY){
-
-document.getElementById("login").style.display="none";
-
-document.getElementById("menu").style.display="block";
-
+if(key.value===KEY){
+login.style.display="none";
+menu.style.display="block";
 }else{
-
-document.getElementById("error").textContent=
-"Chiave non valida.";
-
+error.textContent="Chiave non valida.";
+}
 }
 
-}
-
-function openSection(id){
-
-document.querySelectorAll(".section").forEach(
-section=>section.classList.remove("active")
-);
-
+function openTab(id){
+document.querySelectorAll(".section")
+.forEach(x=>x.classList.remove("active"));
 document.getElementById(id).classList.add("active");
-
 }
 
 function changeName(){
-
-const name=document.getElementById("playerName").value;
-
-if(name.trim()!==""){
-
-document.getElementById("currentName").textContent=name;
-
+let n=playerName.value.trim();
+if(n)currentName.textContent=n;
 }
 
+function setLevel(){
+currentLevel.textContent=level.value;
 }
 
-let balance=1000000;
+function addXP(){
+xp+=100;
+document.getElementById("xp").textContent=xp;
+}
+
+function toggle(el,name){
+el.classList.toggle("on");
+let state=el.classList.contains("on")?"ON":"OFF";
+visualLog.textContent=name+" → "+state+"\n"+visualLog.textContent;
+}
+
+function selectVehicle(){
+vehicleName.textContent=vehicleType.value;
+}
+
+function telemetry(){
+speed.textContent=Math.floor(60+Math.random()*180);
+rpm.textContent=Math.floor(1500+Math.random()*5000);
+fuel.textContent=Math.floor(20+Math.random()*81)+"%";
+carHealth.textContent=Math.floor(60+Math.random()*41)+"%";
+}
+
+function world(){
+x.textContent=(Math.random()*1000-500).toFixed(2);
+y.textContent=(Math.random()*1000-500).toFixed(2);
+z.textContent=(Math.random()*100).toFixed(2);
+}
 
 function spin(){
+let b=Number(bet.value);
 
-const bet=Number(document.getElementById("bet").value);
-
-if(bet<=0 || bet>balance){
-
-document.getElementById("result").textContent=
-"Importo non valido.";
-
+if(b<=0||b>balance){
+result.textContent="Importo non valido.";
 return;
-
 }
 
-if(Math.random()<0.5){
+let win=Math.random()<0.5;
 
-balance+=bet;
-
-document.getElementById("result").textContent=
-"Vittoria demo: +"+bet+" $";
-
+if(win){
+balance+=b;
+result.textContent="Vittoria demo: +"+b+" $";
 }else{
-
-balance-=bet;
-
-document.getElementById("result").textContent=
-"Perdita demo: -"+bet+" $";
-
+balance-=b;
+result.textContent="Perdita demo: -"+b+" $";
 }
 
 document.getElementById("balance").textContent=
-balance.toLocaleString();
+balance.toLocaleString()+" $";
 
+casinoLog.textContent=
+new Date().toLocaleTimeString()+" — "+
+result.textContent+"\n"+casinoLog.textContent;
 }
 
+function resetCasino(){
+balance=1000000;
+document.getElementById("balance").textContent="1,000,000 $";
+result.textContent="Saldo ripristinato.";
+}
+
+function theme(t){
+if(t==="blue")
+document.body.style.background="#050914";
+else if(t==="gold")
+document.body.style.background="#120d05";
+else
+document.body.style.background="#050509";
+}
+
+function language(l){
+if(l==="English")
+document.querySelector(".logo").textContent="♛ GENTLEMAN MENU";
+}
 </script>
 
 </body>
