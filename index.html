@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>GENTLEMAN MENU</title>
+
+<style>
+*{
+box-sizing:border-box;
+}
+
+body{
+margin:0;
+background:#050509;
+color:white;
+font-family:Arial,sans-serif;
+min-height:100vh;
+}
+
+.login{
+width:90%;
+max-width:400px;
+margin:80px auto;
+padding:30px;
+background:#0d0a15;
+border:1px solid #9b4dff;
+border-radius:20px;
+text-align:center;
+box-shadow:0 0 30px #8b3dff66;
+}
+
+.logo{
+font-size:28px;
+font-weight:bold;
+color:#c084fc;
+text-shadow:0 0 15px #9b4dff;
+}
+
+input{
+width:100%;
+padding:14px;
+margin-top:20px;
+background:#08060d;
+border:1px solid #6d28d9;
+border-radius:10px;
+color:white;
+}
+
+button{
+padding:13px 20px;
+margin-top:12px;
+background:#7c3aed;
+border:0;
+border-radius:10px;
+color:white;
+font-weight:bold;
+}
+
+#menu{
+display:none;
+width:95%;
+max-width:1100px;
+margin:20px auto;
+background:#09070f;
+border:1px solid #8b3dff;
+border-radius:20px;
+box-shadow:0 0 35px #8b3dff55;
+overflow:hidden;
+}
+
+.header{
+padding:20px;
+border-bottom:1px solid #392052;
+font-size:24px;
+font-weight:bold;
+color:#c084fc;
+}
+
+.content{
+padding:20px;
+}
+
+.card{
+background:#100b19;
+border:1px solid #4c1d72;
+border-radius:14px;
+padding:18px;
+margin-bottom:15px;
+}
+
+.card h2{
+margin-top:0;
+color:#d8b4fe;
+}
+
+.menu-button{
+margin:5px;
+}
+
+.section{
+display:none;
+}
+
+.section.active{
+display:block;
+}
+
+.error{
+color:#fb7185;
+margin-top:10px;
+}
+</style>
+</head>
+
+<body>
+
+<div id="login" class="login">
+
+<div class="logo">♛ GENTLEMAN MENU</div>
+
+<p>Accesso al menu</p>
+
+<input
+id="key"
+type="password"
+placeholder="Inserisci la chiave"
+>
+
+<button onclick="unlock()">
+SBLOCCA MENU
+</button>
+
+<div id="error" class="error"></div>
+
+</div>
+
+<div id="menu">
+
+<div class="header">
+♛ GENTLEMAN MENU
+</div>
+
+<div class="content">
+
+<button class="menu-button" onclick="openSection('home')">
+🏠 HOME
+</button>
+
+<button class="menu-button" onclick="openSection('visual')">
+👁 VISUAL
+</button>
+
+<button class="menu-button" onclick="openSection('player')">
+👤 PLAYER
+</button>
+
+<button class="menu-button" onclick="openSection('vehicle')">
+🚗 VEHICLE
+</button>
+
+<button class="menu-button" onclick="openSection('world')">
+🌍 WORLD
+</button>
+
+<button class="menu-button" onclick="openSection('casino')">
+🎰 CASINO TEST
+</button>
+
+<button class="menu-button" onclick="openSection('settings')">
+⚙ SETTINGS
+</button>
+
+<div id="home" class="section active card">
+<h2>🏠 HOME</h2>
+<p>Benvenuto nel GENTLEMAN MENU.</p>
+<p>Versione: 1.0 TEST</p>
+</div>
+
+<div id="visual" class="section card">
+<h2>👁 VISUAL</h2>
+<p>ESP — TEST</p>
+<p>Boxes — TEST</p>
+<p>Names — TEST</p>
+<p>Health — TEST</p>
+<p>Distance — TEST</p>
+</div>
+
+<div id="player" class="section card">
+<h2>👤 PLAYER</h2>
+
+<input
+id="playerName"
+placeholder="Nome demo"
+>
+
+<button onclick="changeName()">
+CAMBIA NOME
+</button>
+
+<p>Nome attuale:
+<b id="currentName">Gentleman</b>
+</p>
+
+<p>Livello:</p>
+
+<select id="level">
+<option>1</option>
+<option>10</option>
+<option>25</option>
+<option>50</option>
+<option>100</option>
+</select>
+
+</div>
+
+<div id="vehicle" class="section card">
+<h2>🚗 VEHICLE</h2>
+<p>Velocità — TEST</p>
+<p>RPM — TEST</p>
+<p>Carburante — TEST</p>
+<p>Salute — TEST</p>
+</div>
+
+<div id="world" class="section card">
+<h2>🌍 WORLD</h2>
+<p>World Debug — TEST</p>
+<p>Coordinate — TEST</p>
+<p>Camera Info — TEST</p>
+</div>
+
+<div id="casino" class="section card">
+<h2>🎰 CASINO TEST</h2>
+<p>Simulatore offline.</p>
+
+<p>Saldo demo:
+<b id="balance">1000000</b>
+$</p>
+
+<input
+id="bet"
+type="number"
+value="1000"
+min="1"
+>
+
+<button onclick="spin()">
+GIRA
+</button>
+
+<p id="result">Risultato: —</p>
+
+</div>
+
+<div id="settings" class="section card">
+<h2>⚙ SETTINGS</h2>
+<p>GENTLEMAN MENU v1.0</p>
+<button onclick="location.reload()">
+RESET
+</button>
+</div>
+
+</div>
+</div>
+
+<script>
+
+const KEY="GENTLEMAN-2026";
+
+function unlock(){
+
+const entered=document.getElementById("key").value;
+
+if(entered===KEY){
+
+document.getElementById("login").style.display="none";
+
+document.getElementById("menu").style.display="block";
+
+}else{
+
+document.getElementById("error").textContent=
+"Chiave non valida.";
+
+}
+
+}
+
+function openSection(id){
+
+document.querySelectorAll(".section").forEach(
+section=>section.classList.remove("active")
+);
+
+document.getElementById(id).classList.add("active");
+
+}
+
+function changeName(){
+
+const name=document.getElementById("playerName").value;
+
+if(name.trim()!==""){
+
+document.getElementById("currentName").textContent=name;
+
+}
+
+}
+
+let balance=1000000;
+
+function spin(){
+
+const bet=Number(document.getElementById("bet").value);
+
+if(bet<=0 || bet>balance){
+
+document.getElementById("result").textContent=
+"Importo non valido.";
+
+return;
+
+}
+
+if(Math.random()<0.5){
+
+balance+=bet;
+
+document.getElementById("result").textContent=
+"Vittoria demo: +"+bet+" $";
+
+}else{
+
+balance-=bet;
+
+document.getElementById("result").textContent=
+"Perdita demo: -"+bet+" $";
+
+}
+
+document.getElementById("balance").textContent=
+balance.toLocaleString();
+
+}
+
+</script>
+
+</body>
+</html>
